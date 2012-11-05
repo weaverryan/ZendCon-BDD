@@ -21,13 +21,9 @@ class FeatureContext extends MinkContext
 
         // El
         $el = $page->findById('jq-primarySearch');
-        echo 'Tag Name: ' . $el->getTagName() . PHP_EOL; // undefined function getTagName() on a non-object
-
-        // Get driver name
-        $reflection = new \ReflectionObject($this->getSession());
-        $prop = $reflection->getProperty('driver');
-        $prop->setAccessible(true);
-        echo get_class($prop->getValue($this->getSession())) . PHP_EOL;
+        if('input' !== $el->getTagName()) {
+            throw new Exception('Element with id "jq-primarySearch" should be an input');
+        }
     }
 
     /** @Given /^I am in a directory "([^"]*)"$/ */

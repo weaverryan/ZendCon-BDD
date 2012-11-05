@@ -3,6 +3,7 @@ default:
     mink_extension.phar:
       mink_loader: 'mink.phar'
       base_url:    'http://api.jquery.com/'
-      default_session: selenium2
+      default_session: goutte
+      goutte:
       selenium2:
         wd_host: 'http://api.jquery.com/'
