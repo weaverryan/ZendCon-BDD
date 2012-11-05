@@ -13,3 +13,8 @@ Feature: ls
       bar
       foo
       """
+  @javascript
+  Scenario: View the demo page
+    When I play with the browser
+    When I go to "/"
+    Then I should see "jQuery API"

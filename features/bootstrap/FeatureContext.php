@@ -13,8 +13,21 @@ class FeatureContext extends MinkContext
 {
     private $output;
 
-    public function __destruct() {
-        $this->visit('/');
+    /** @When /^I play with the browser$/ */
+    public function iPlayWithTheBrowser() {
+        $this->getSession()->visit($this->locatePath('/'));
+        // get the current page URL:
+        $page = $this->getSession()->getPage();
+
+        // El
+        $el = $page->findById('jq-primarySearch');
+        echo 'Tag Name: ' . $el->getTagName() . PHP_EOL; // undefined function getTagName() on a non-object
+
+        // Get driver name
+        $reflection = new \ReflectionObject($this->getSession());
+        $prop = $reflection->getProperty('driver');
+        $prop->setAccessible(true);
+        echo get_class($prop->getValue($this->getSession())) . PHP_EOL;
     }
 
     /** @Given /^I am in a directory "([^"]*)"$/ */
